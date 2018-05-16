@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' http://instagram.starfamous.ru 
+	https://instagram.starfamous.ru 'unsafe-inline' 'unsafe-eval'">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" >
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+<div class='wrapper' ng-controller='weatherCtrl'>
+
+	<!-- LOADER -->
+	<div class='loader'><img class='loader-image' src='images/loader.gif'></div>
+
+	<!-- ERROR -->
+	<table class='error-block'>
+		<tr>
+			<td>
+				<img class='error-image' src='images/error.png'>
+				<div class='error-head' ng-bind='errorHead'></div>
+				<div class='error-text' ng-bind='errorText'></div>
+				<img class='error-reload' ng-click='reload()' src="images/reload.png">
+			</td>
+		</tr>
+	</table>
+
+	<div class='main-block'>
+
+		<div class='main-top'>
+			<div class='user-geoposition' ng-bind='curLocation'></div>
+
+			<div class='menu-switchers'>
+				<div class='menu-but menu-left menu-active' ng-click='switchContent(0)' ng-bind='todayMenuBut'></div>
+				<div class='menu-but menu-right' ng-click='switchContent(1)' ng-bind='tenDaysMenuBut'></div>
+			</div>
+		</div>
+
+		<div id='mySwipe' class='swipe'>
+			<div class='swipe-wrap'>
+				<div class='today-block'>
+					<div class='today-info'>
+						<div class='today-date' ng-bind='curDate'></div>
+						<div class='today-temp'>
+							<div class='today-temp-left'>
+								<div class='today-temp-current'>
+									<span class='today-temp-num' ng-bind='curTemp'></span><span>&deg;</span><sup ng-bind='curTempUnit'></sup>
+								</div>
+								<div class='today-temp-feel'>{{feelsLikeText}} <span ng-bind='feelsLikeTemp'></span>&deg;</div>
+							</div>
+							<div class='today-temp-right'>
+								<div><img class='today-temp-image' src=''></div>
+								<div class='today-temp-state' ng-bind='weatherState'></div>
+							</div>
+						</div>
+						<div class='today-hours'>
+							<div class='today-hours-elem' ng-repeat='hour in hours'>
+								<div><img class='today-hours-image' ng-src='{{hour.getDetails().getUp().getIcon()}}'></div>
+								<div class='today-hours-num'>{{hour.getDetails().getUt().getTemperature().getValue()}}&deg;</div>
+								<div class='today-hours-time'>{{hour.getDateTime()}}</div>
+							</div>
+						</div>
+					</div>
+
+					<div class='today-details'>
+						<div class='today-details-top' ng-bind='curDetailsHead'></div>
+						<table>
+							<tr>
+								<td class='today-details-left' ng-bind='humidityDetailsText'></td>
+								<td class='today-details-right' ng-bind='humidityDetails'></td>
+							</tr>
+							<tr>
+								<td class='today-details-left' ng-bind='uvDetailsText'></td>
+								<td class='today-details-right' ng-bind='uvDetails'></td>
+							</tr>
+						</table>
+					</div>
+
+					<div class='today-wind'>
+						<div class='today-wind-top' ng-bind='windText'></div>
+						<div class='today-wind-info'>
+							<div class='today-wind-num' ng-bind='windNum'></div>
+							<div class='today-wind-direction'>
+								<div><img class='today-wind-image' src=''></div>
+								<div class='today-wind-direction-text' ng-bind='windUnit'></div>
+							</div>
+						</div>
+						<div class='today-wind-hours'>
+							<div class='today-wind-hours-elem' ng-repeat='hour in hours'>
+								<div class='today-wind-hours-num'>{{hour.getDetails().getWind().getValue()}}</div>
+								<div><img class='today-wind-hours-image' ng-src='{{hour.getDetails().getWind().getIcon()}}'></div>
+								<div class='today-wind-hours-time'>{{hour.getDateTime()}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class='days-block'>
+					<div class='days-elem' add-info='false' ng-repeat='day in days'>
+						<table>
+							<tr ng-click='toogleDays($index)'>
+								<td class='days-elem-left'>
+									<div class='days-elem-left-date'>{{setDaysName($index, day.getDateTime())}}</div>
+									<div class='days-elem-left-text'>{{day.getDetails().getUp().getIconPhrase()}}</div>
+								</td>
+								<td class='days-elem-middle'>
+									<img class='days-elem-middle-image' ng-src='{{day.getDetails().getUp().getIcon()}}'>
+								</td>
+								<td class='days-elem-right'>
+									<div class='days-elem-right-top'>{{day.getDetails().getUt().getTemperature().getValue()}}&deg;</div>
+									<div class='days-elem-right-bottom'>{{day.getDetails().getUt().getTemperatureSide().getValue()}}&deg;</div>
+								</td>
+							</tr>
+						</table>
+
+						<div class='days-elem-hidden'>
+							<table class='days-elem-details'>
+								<tr>
+									<td class='days-elem-details-left' ng-bind='humidityDetailsText'></td>
+									<td class='days-elem-details-right'>{{day.getDetails().getHumidity()}}</td>
+								</tr>
+								<tr>
+									<td class='days-elem-details-left' ng-bind='uvDetailsText'></td>
+									<td class='days-elem-details-right'>{{day.getDetails().getUv().getIndex()}}</td>
+								</tr>
+							</table>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<script type="text/javascript" src="js/lib/base.js"></script>
+
+<script type="text/javascript" src="js/utils/Constant.js"></script>
+<script type="text/javascript" src="js/utils/Lang.js"></script>
+<script type="text/javascript" src="js/utils/Log.js"></script>
+<script type="text/javascript" src="js/utils/Connector.js"></script>
+<script type="text/javascript" src="js/utils/Manager.js"></script>
+
+<script type="text/javascript" src="js/lib/angular.min.js"></script>
+<script type="text/javascript" src="js/lib/angular-route.min.js"></script>
+<script type="text/javascript" src="js/lib/jquery.min.js"></script>
+<script type="text/javascript" src="js/lib/swipe.js"></script>
+
+<script type="text/javascript" src="js/utils/define_modules.js"></script>
+
+<script type="text/javascript" src="js/app/pages/main/weather_controller.js"></script>
+<script type="text/javascript" src="js/app/pages/main/weather_services_view.js"></script>
+<script type="text/javascript" src="js/app/pages/main/weather_lang.js"></script>
+
+<script type="text/javascript" src="js/app/app.js"></script>
+<script type="text/javascript" src="js/app/main.js"></script>
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/utils/index.js"></script>
+
+<script type="text/javascript" src="js/main/DayUnit.js"></script>
+<script type="text/javascript" src="js/main/Details.js"></script>
+<script type="text/javascript" src="js/main/Forecast.js"></script>
+<script type="text/javascript" src="js/main/DayUnit.js"></script>
+<script type="text/javascript" src="js/main/FullDayUnit.js"></script>
+<script type="text/javascript" src="js/main/HourUnit.js"></script>
+<script type="text/javascript" src="js/main/Location.js"></script>
+<script type="text/javascript" src="js/main/ShortDayUnit.js"></script>
+<script type="text/javascript" src="js/main/Temperature.js"></script>
+<script type="text/javascript" src="js/main/UnitPresentation.js"></script>
+<script type="text/javascript" src="js/main/UnitTemperature.js"></script>
+<script type="text/javascript" src="js/main/UV.js"></script>
+<script type="text/javascript" src="js/main/Wind.js"></script>
+
+<script type="text/javascript">
+	application.initialize();
+</script>
+
+</body>
+</html>

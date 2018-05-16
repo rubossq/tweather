@@ -1,0 +1,453 @@
+*{
+	-webkit-tap-highlight-color: transparent !important;
+	-webkit-focus-ring-color: transparent !important;
+	outline: none !important;
+	-webkit-appearance: none;
+}
+
+html, body{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	-webkit-user-select: none;
+}
+
+@font-face{
+	font-family: "RobotoRegular";
+	src: url(../fonts/roboto_regular.ttf) format('truetype');
+}
+
+@font-face{
+	font-family: "RobotoLight";
+	src: url(../fonts/roboto_light.ttf) format('truetype');
+}
+
+body{
+	font-family: "RobotoRegular", sans-serif;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+}
+
+table{
+	border-collapse: collapse;
+}
+
+/* Swipe 2 required styles */
+.swipe{
+	overflow: hidden;
+	visibility: hidden;
+	position: relative;
+}
+.swipe-wrap{
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+}
+.swipe-wrap > div{
+	float: left;
+	width: 100%;
+	position: relative;
+}
+/* END required styles */
+
+
+/* TODAY */
+.loader{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	background-color: #FFFFFF;
+}
+
+.loader-image{
+	width: 150px;
+	height: 150px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.wrapper{
+	width: 100%;
+	height: 100%;
+}
+
+
+/* ERROR */
+.error-block{
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	display: none;
+}
+
+.error-image{
+	width: 200px;
+	margin-bottom: 15px;
+}
+
+.error-head{
+	color: #827D7D;
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.error-text{
+	color: #827D7D;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+.error-reload{
+	width: 50px;
+	height: 50px;
+}
+
+.error-reload-active{
+	-webkit-animation: rotating 0.5s linear infinite;
+}
+@-webkit-keyframes rotating{
+	from{
+		-webkit-transform: rotate(0deg);
+	}
+	to{
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+.main-block{
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+.main-top{
+	padding-top: 10px;
+	background-color: #7C8FAD;
+}
+
+/* GEOPOSITION */
+.user-geoposition{
+	height: 45px;
+	line-height: 45px;
+	padding-left: 30px;
+	margin: 0 10px;
+	color: #000000;
+	font-size: 16px;
+	background-color: #FFFFFF;
+	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* SWITCHERS */
+.menu-switchers{
+	width: 100%;
+	height: 42px;
+	margin-top: 10px;
+	font-size: 0;
+	white-space: nowrap;
+	text-align: center;
+}
+
+.menu-but{
+	width: 50%;
+	height: 40px;
+	line-height: 40px;
+	vertical-align: top;
+	color: #C3CED2;
+	font-size: 13px;
+	display: inline-block;
+	background-color: transparent;
+}
+
+.menu-active{
+	border-bottom: 2px solid #FFFFFF;
+	color: #FFFFFF;
+}
+
+
+/* TODAY */
+.today-block{
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+.today-info{
+	height: 100%;
+	background-color: #809DC3;
+	background: linear-gradient(to bottom, #7C8FAD, #809DC3);
+	position: relative;
+	text-shadow: 0 1px 1px #958888;
+}
+
+.today-date{
+	color: #000000;
+	font-size: 18px;
+	padding: 25px 0 10px 20px;
+	text-shadow: 0 1px 1px #B2B2B2;
+}
+
+.today-temp{
+	text-align: center;
+	font-size: 0;
+	padding: 0 20px;
+	white-space: nowrap;
+}
+
+.today-temp-left{
+	width: 70%;
+	display: inline-block;
+	text-align: left;
+}
+
+.today-temp-current > *{
+	color: #FFFFFF;
+	font-size: 55px;
+	vertical-align: top;
+	font-family: "RobotoLight", sans-serif;
+}
+
+.today-temp-num{
+	font-size: 75px;
+}
+
+.today-temp-feel{
+	color: #FFFFFF;
+	font-size: 14px;
+}
+
+.today-temp-right{
+	width: 30%;
+	display: inline-block;
+}
+
+.today-temp-image{
+	width: 100%;
+}
+
+.today-temp-state{
+	color: #FFFFFF;
+	font-size: 14px;
+}
+
+.today-hours{
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 20px;
+	padding: 0 10px;
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
+.today-hours::-webkit-scrollbar{
+	display: none;
+}
+
+.today-hours-elem{
+	padding: 0 10px;
+	text-align: center;
+	display: inline-block;
+}
+
+.today-hours-image{
+	width: 35px;
+}
+
+.today-hours-num{
+	color: #FFFFFF;
+	font-size: 14px;
+	margin: -5px 0 5px 0;
+}
+
+.today-hours-time{
+	color: #000000;
+	font-size: 11px;
+	text-shadow: 0 1px 1px #B2B2B2;
+	font-weight: 600;
+}
+
+
+.today-details{
+	padding: 20px 0 20px 20px;
+	border-bottom: 1px solid gray;
+}
+
+.today-details-top{
+	color: #000000;
+	font-size: 13px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.today-details-left{
+	width: 1px;
+	padding: 0 40px 10px 0;
+	color: #827D7D;
+	font-size: 13px;
+}
+
+.today-details-right{
+	color: #000000;
+	font-size: 13px;
+	vertical-align: top;
+}
+
+
+.today-wind{
+	padding: 20px 0;
+}
+
+.today-wind-top{
+	color: #000000;
+	font-size: 13px;
+	font-weight: bold;
+	padding-left: 20px;
+	margin-bottom: 20px;
+}
+
+.today-wind-info{
+	padding-left: 20px;
+	font-size: 0;
+}
+
+.today-wind-num{
+	color: #809DC3;
+	font-size: 60px;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.today-wind-direction{
+	text-align: center;
+	display: inline-block;
+}
+
+.today-wind-image{
+	width: 20px;
+	margin-bottom: 4px;
+}
+
+.today-wind-direction-text{
+	color: #827D7D;
+	font-size: 13px;
+}
+
+.today-wind-hours{
+	padding: 20px 10px 0 10px;
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
+.today-wind-hours::-webkit-scrollbar{
+	display: none;
+}
+
+.today-wind-hours-elem{
+	padding: 0 10px;
+	text-align: center;
+	display: inline-block;
+}
+
+.today-wind-hours-num{
+	color: #000000;
+	font-size: 14px;
+}
+
+.today-wind-hours-image{
+	width: 20px;
+}
+
+.today-wind-hours-time{
+	color: #000000;
+	font-size: 11px;
+	text-shadow: 0 1px 1px #B2B2B2;
+}
+
+
+/* 10DAYS */
+.days-block{
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+.days-elem{
+	border-bottom: 1px solid #E2DDDD;
+}
+
+.days-elem table{
+	width: 100%;
+}
+
+.days-elem-left{
+	padding: 10px 0 10px 20px;
+}
+
+.days-elem-left-date{
+	color: #000000;
+	font-size: 13px;
+	margin-bottom: 3px;
+}
+
+.days-elem-left-text{
+	color: #827D7D;
+	font-size: 13px;
+}
+
+.days-elem-middle{
+	width: 1px;
+	padding: 10px 0;
+}
+
+.days-elem-middle-image{
+	width: 35px;
+}
+
+.days-elem-right{
+	width: 30px;
+	padding: 10px 15px 10px 0;
+	text-align: right;
+}
+
+.days-elem-right-top{
+	color: #000000;
+	font-size: 13px;
+	margin-bottom: 3px;
+}
+
+.days-elem-right-bottom{
+	color: #827D7D;
+	font-size: 13px;
+}
+
+.days-elem-hidden{
+	padding: 5px 0 10px 0;
+	display: none;
+}
+
+.days-elem-details{
+	width: auto;
+}
+
+.days-elem-details-left{
+	width: 1px;
+	padding: 0 40px 10px 20px;
+	color: #827D7D;
+	font-size: 13px;
+}
+
+.days-elem-details-right{
+	color: #000000;
+	font-size: 13px;
+	vertical-align: top;
+}
